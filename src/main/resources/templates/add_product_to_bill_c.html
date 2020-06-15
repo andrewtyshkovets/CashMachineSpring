@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:fragment="header">
+    <title th:text='#{title}'></title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="form-style-2">
+    <form class="alert-danger" id="alert">
+            <div class="alert alert-danger" role="alert" th:if="${error}" th:text="#{code.error}"/>
+    </form>
+    <div class="form-style-2-heading" th:text="#{add.code}"/>
+    <form method="post" action="/cashier/addProductByCode">
+        <table>
+            <tr>
+                <td>
+                  <span th:text="#{code}"/>
+                </td>
+                <td>
+                   <input class="input-field" type="number" id="code" name="code">
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label for="amount" th:text="#{amount}"></label>
+                </td>
+                <td>
+                  <input class="input-field" type="number" id="amount" name="amount">  
+                </td>
+            </tr>        
+        </table>
+        <input type="submit" th:value="#{add}">
+    </form>
+</div>
+</body>
+</html>

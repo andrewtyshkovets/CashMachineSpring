@@ -1,0 +1,88 @@
+
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:fragment="header">
+    <title th:text='#{title}'></title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<form method="get" action="/logOut">
+    <input type="submit" value="Log Out">
+</form>
+<p th:text="#{title} + '. ' + #{index.welcome}"></p></div>
+<form method="get" action="/newCashBox">
+    <input type="submit" value="Register cashBox">
+</form>
+
+<form method="post" action="/openCashBox">
+    <input class="input-field" type="number" step="1" name="number">
+    <input class="input-field" type="number" step="0.01" name="startMoney">
+    <input type="submit" value="Open cashBox">
+</form>
+
+<form method="get" action="/openBill">
+    <input type="submit" value="Open Bill">
+</form>
+
+<form method="post" action="/addProductByCode">
+    code
+    <input class="input-field" type="number" step="1" name="code">
+    amount
+    <input class="input-field" type="number" step="0.01" name="amount">
+    <input type="submit" value="Add by Code">
+</form>
+
+<form method="post" action="/addProductByName">
+    name
+    <input class="input-field" type="text" name="name">
+    amount
+    <input class="input-field" type="number" step="0.01" name="amount">
+    <input type="submit" value="Add by Name">
+</form>
+
+<form method="post" action="/closeBill">
+    <input type="submit" value="Close Bill">
+</form>
+
+<form method="post" action="/cancelBill">
+    Bill Id
+    <input class="input-field" type="number" step="1" name="billId">
+    <input type="submit" value="Cancel Bill">
+</form>
+
+<form method="post" action="/closeCashBox">
+    <input type="submit" value="Close CashBox">
+</form>
+
+
+<form method="post" action="/getZReport">
+    CashBox Id
+    <input class="input-field" type="number" step="1" name="cashBoxId">
+    <input type="submit" value="Z-Report">
+</form>
+
+
+<form method="post" action="/getXReport">
+    CashBox Id
+    <input class="input-field" type="number" step="1" name="cashBoxId">
+    <input type="submit" value="X-Report">
+</form>
+
+<form method="post" action="/updateProductByName">
+    name
+    <input class="input-field" type="text" name="name">
+    Amount
+    <input class="input-field" type="number" step="1" name="amount">
+    <input type="submit" value="Add">
+</form>
+
+<form method="post" action="/updateProductByCode">
+    Code
+    <input class="input-field" type="number" step="1"name="code">
+    Amount
+    <input class="input-field" type="number" step="1" name="amount">
+    <input type="submit" value="Add">
+</form>
+
+</div>
+</body>
+</html>

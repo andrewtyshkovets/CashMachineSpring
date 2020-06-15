@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:fragment="header">
+    <title th:text='#{title}'></title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="form-style-2">
+    <div class="form-style-2-heading" align="center" th:text="#{x.report}"></div>
+    <form>
+        <table class="add_Product" align="center" border="1">
+            <tr>
+                <th th:text="#{report.ID}">Report ID</th>
+                <td th:text="${report.id}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{type}"></th>
+                <td th:text="${report.type.name()}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{cashbox.id}"></th>
+                <td th:text="${report.cashBox.id}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{cashiers.id}"></th>
+                <td th:text="${report.cashBox.user.id}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{start.time}"></th>
+                <td th:text="${report.startTime}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{start.money}"></th>
+                <td th:text="${report.startMoney}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{current.time}"></th>
+                <td th:text="${report.finishTime}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{current.money}"></th>
+                <td th:text="${report.finishMoney}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{total.sales}"></th>
+                <td th:text="${report.sumOfSales}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{closed.bills}"></th>
+                <td th:text="${report.totalClosed}"></td>
+            </tr>
+            <tr>
+                <th th:text="#{cancelled.bills}"></th>
+                <td th:text="${report.totalCancelled}"></td>
+            </tr>
+        </table> 
+        <br>
+    </form>
+    <form align="center" method="get" action="/seniorCashier">
+        <input type="submit" value="OK">
+    </form>
+</div>
+</body>
+</html>

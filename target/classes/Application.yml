@@ -1,0 +1,3 @@
+spring:
+  contentBundle:
+    basename: contentBundle

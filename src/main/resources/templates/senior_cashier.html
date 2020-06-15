@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:fragment="header">
+    <title th:text='#{title}'></title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="form-style-2">
+    <form class="alert-danger" id="alert">
+        <div class="alert alert-danger" role="alert" th:if="${error}" th:text="#{bill.cashBox.err}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${success}" th:text="#{operation.success}"></div>
+    </form>
+
+    <div class="form-style-2-heading" align="center" th:text="#{senior.cashier}">
+    </div>
+    <div align="center">
+        <form method="post" action="/seniorCashier/cancelBill">
+            <input type="number" name="billId" th:placeholder="#{bill.ID}" class="input-field">
+            <input type="submit" th:value="#{cancel.bill}">
+        </form>
+        <br>
+        <form method="post" action="/seniorCashier/makeX">
+            <input type="number" name="cashBoxId" th:placeholder="#{cashbox.id}" class="input-field">
+            <input type="submit" th:value="#{x.report}">
+        </form>
+        <br>
+        <form method="post" action="/seniorCashier/makeZ">
+            <input type="number" name="cashBoxId" th:placeholder="#{cashbox.id}" class="input-field">
+            <input type="submit" th:value="#{z.report}">
+        </form>
+        <br>
+        <form method="get" action="/logOut">
+            <input type="submit" th:value="#{log.out}">
+        </form>
+    </div>
+</div>
+</body>
+</html>
