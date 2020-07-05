@@ -41,7 +41,8 @@ public class BillController {
         Bill bill;
         List<BillBody> billBodyList;
         if (httpSession.getAttribute("billId") == null) {
-            Long userId = (Long) httpSession.getAttribute("user");
+            UserDto user = (UserDto) httpSession.getAttribute("user");
+            Long userId = user.getId();
             Long cashBoxId = (Long) httpSession.getAttribute("cashBoxId");
             Long billId = billService.openBill(userId, cashBoxId);
             httpSession.setAttribute("billId", billId);

@@ -29,7 +29,7 @@ public class SignUpController {
 
     @PostMapping("/signUp")
     public String getSignUpPage(Model model,UserForm userForm) {
-        String regex = "^[a-z]{3,}\\d*$";
+        String regex = "^[a-zA-Z]{3,}\\d*$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(userForm.getUsername());
         if(!m.matches()){

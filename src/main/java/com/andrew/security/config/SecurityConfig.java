@@ -1,12 +1,9 @@
 package com.andrew.security.config;
 
-import com.andrew.security.filters.TokenAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,10 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-
 import javax.sql.DataSource;
 
 
@@ -26,8 +19,9 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Qualifier("userDetailsServiceImpl")
+
     @Autowired
+    @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -37,12 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private AuthenticationProvider authenticationProvider;
-
-    @Autowired
-    private TokenAuthFilter tokenAuthFilter;
-/*
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -55,52 +43,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-
- */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .addFilterBefore(tokenAuthFilter, BasicAuthenticationFilter.class)
-                .antMatcher("/**")
-                .authenticationProvider(authenticationProvider)
                 .authorizeRequests()
+                .antMatchers("/seniorCashier/**").hasAuthority("SENIOR_CASHIER")
                 .antMatchers("/cashier/**").hasAuthority("CASHIER")
-                .antMatchers("/login").permitAll()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/productObserver/**").hasAuthority("PRODUCT_OBSERVER")
+                //.antMatchers("/").authenticated()
+                .antMatchers("/css/**").permitAll()
                 .antMatchers("/signUp").permitAll()
-                .antMatchers("/roleController").permitAll();
-        http.csrf().disable();
-    }
-/*
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                    .antMatchers("/seniorCashier/**").hasRole("SENIOR_CASHIER")
-                    .antMatchers("/cashier/**").hasAuthority("CASHIER")
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/productObserver/**").hasRole("PRODUCT_OBSERVER")
-                    //.antMatchers("/").authenticated()
-                    .antMatchers("/css/**").permitAll()
-                    .antMatchers("/signUp").permitAll()
-                    .anyRequest().authenticated()
+                .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
-                    .loginProcessingUrl("/perform_login")
-                    .defaultSuccessUrl("/roleController")
-                    .loginPage("/login")
-                    .permitAll();
+                .defaultSuccessUrl("/roleController")
+                .loginPage("/login")
+                .permitAll();
         http.csrf().disable();
     }
 
- */
 
-    @Bean
-    public PersistentTokenRepository tokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource);
-        return tokenRepository;
-    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);

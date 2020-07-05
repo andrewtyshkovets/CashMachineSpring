@@ -1,6 +1,5 @@
 package com.andrew.controllers;
 
-import com.andrew.models.Product;
 import com.andrew.repositories.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

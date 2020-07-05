@@ -1,10 +1,8 @@
 package com.andrew.controllers;
 
-import com.andrew.models.CashBox;
-import com.andrew.models.CashBoxNumber;
 import com.andrew.repositories.CashBoxNumberRepository;
-import com.andrew.repositories.CashBoxRepository;
 import com.andrew.service.CashBoxService;
+import com.andrew.transfer.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,9 +38,11 @@ public class CashBoxController {
         HttpSession httpSession = request.getSession();
         Integer number = (Integer) httpSession.getAttribute("cashBoxNumber");
         Double startMoney = (Double) httpSession.getAttribute("startMoney");
-        Long id = cashBoxService.openCashBoxSession(number, (Long) httpSession.getAttribute("user"), startMoney);
+        UserDto user = (UserDto) httpSession.getAttribute("user");
+        Long userId = user.getId();
+        Long id = cashBoxService.openCashBoxSession(number, userId, startMoney);
         httpSession.setAttribute("cashBoxId", id);
-        return "redirect:/cashier/cashBox";
+        return "cashbox";
     }
 
     @PostMapping("/cashier/closeCashBox")
@@ -57,7 +57,7 @@ public class CashBoxController {
     }
 
     @GetMapping("/cashier/cashBox")
-    public String getCashBoxPage(Model model,HttpServletRequest request){
+    public String getCashBoxPage(Model model, HttpServletRequest request) {
         return "cashbox";
     }
 

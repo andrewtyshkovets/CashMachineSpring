@@ -32,6 +32,7 @@ public class SeniorCashierController {
 
     @GetMapping("/seniorCashier")
     public String getSeniorCashierPage(Model model, HttpServletRequest request) {
+        System.out.println("123");
         if (request.getParameterMap().containsKey("error")) {
             model.addAttribute("error", true);
         }

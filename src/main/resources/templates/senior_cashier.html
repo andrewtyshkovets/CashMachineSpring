@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:fragment="header">
     <title th:text='#{title}'></title>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="form-style-2">
@@ -28,7 +28,7 @@
             <input type="submit" th:value="#{z.report}">
         </form>
         <br>
-        <form method="get" action="/logOut">
+        <form method="get" action="/logout">
             <input type="submit" th:value="#{log.out}">
         </form>
     </div>

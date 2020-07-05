@@ -38,10 +38,6 @@ public class User {
     @Transient
     @OneToMany(mappedBy = "cashier")
     private List<Bill> bills;
-
-    @Transient
-    @OneToMany(mappedBy = "user")
-    List<Token> tokens;
 }
 
 

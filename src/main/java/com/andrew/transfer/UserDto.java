@@ -10,10 +10,14 @@ import lombok.Data;
 @Builder
 public class UserDto {
     private String username;
+    private Long id;
+    private String role;
 
     public static UserDto from(User user) {
         return UserDto.builder()
                 .username(user.getUsername())
+                .role(user.getRole().name())
+                .id(user.getId())
                 .build();
     }
 }
