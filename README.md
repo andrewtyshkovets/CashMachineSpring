@@ -1,0 +1,2 @@
+# FinalProjectSpring
+Cash Register System. The cashier can open the check, add the selected goods by code from the database (parsley = 234, bread = 222) or by the name of the goods, indicate the number of goods or weight. Close the check. The senior cashier can cancel the check, cancel one item on the check and return the money to the buyer. Make X and Z reports. A merchandiser can create goods and indicate their number in stock.
